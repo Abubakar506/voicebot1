@@ -60,7 +60,7 @@ with open('intro_join.txt', 'r', encoding='utf8', errors='ignore') as fin:
 sent_tokens = [str(sentence) for sentence in TextBlob(raw).sentences]
 
 # Main response function
-def response(user_response):
+def responsess(user_response):
     user_response = user_response.lower().strip()
 
     # Attempt to match with predefined responses
