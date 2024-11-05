@@ -34,7 +34,6 @@ packaging==24.1
 pandas==2.2.3
 pillow==10.4.0
 playsound==1.2.2
-py-espeak-ng==0.1.8
 proto-plus==1.25.0
 protobuf==5.28.3
 pyarrow==18.0.0
@@ -46,7 +45,6 @@ pyglet==2.0.18
 Pygments==2.18.0
 pyparsing==3.2.0
 python-dateutil==2.9.0.post0
-pyttsx3==2.98
 pytz==2024.2
 referencing==0.35.1
 regex==2024.9.11
