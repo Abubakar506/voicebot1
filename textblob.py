@@ -1,4 +1,5 @@
-from textblob import TextBlob
+import nltk  # Import NLTK first
+
 def download_corpora():
     try:
         # Check if corpora are already downloaded
@@ -8,7 +9,16 @@ def download_corpora():
         nltk.data.find('taggers/averaged_perceptron_tagger.zip')
     except LookupError:
         # If not found, download the required corpora
+        print("Corpora not found. Downloading...")
         nltk.download('brown', quiet=True)
         nltk.download('punkt', quiet=True)
         nltk.download('wordnet', quiet=True)
         nltk.download('averaged_perceptron_tagger', quiet=True)
+        print("Download completed.")
+
+# Call the download_corpora function before importing TextBlob
+download_corpora()  
+
+from textblob import TextBlob  # Now import TextBlob
+
+# Rest of your code using TextBlob
