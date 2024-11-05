@@ -30,7 +30,7 @@ if "chat_history" not in st.session_state:
 
 # Start listening for voice input on button click
 if st.button("Start Listening"):
-    user_response, response_text = listen()
+    user_response, response_text = listent()
     # Append both user and bot messages to chat history
     st.session_state.chat_history.append(("user", user_response))
     st.session_state.chat_history.append(("bot", response_text))
