@@ -7,7 +7,7 @@ import datetime
 import nltk
 
 # Ensure 'punkt' is downloaded
-nltk.download('punkt')
+nltk.download('punkt', download_dir='nltk_data')
 
 
 # Set up Google Calendar API credentials
