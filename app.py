@@ -6,10 +6,11 @@ from calendar_utils import create_appointment
 import datetime
 import nltk
 import subprocess
+import sys
 def download_corpora():
     try:
         # Attempt to run the textblob download command
-        subprocess.run(['python', '-m', 'textblob.download_corpora'], check=True)
+        subprocess.run([sys.executable, '-m', 'textblob.download_corpora'], check=True)
         print("Download completed.")
     except subprocess.CalledProcessError as e:
         print(f"An error occurred while downloading corpora: {e}")
