@@ -5,34 +5,18 @@ import string
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-import speech_recognition as sr 
-import nltk
-from nltk.stem import WordNetLemmatizer
+import speech_recognition as sr
+from textblob import TextBlob
 from playsound import playsound
 from fuzzywuzzy import process
 from datetime import datetime, timedelta
 from calendar_utils import create_appointment
 
-# Set up the NLTK data path in the current directory for portability
-nltk_data_dir = os.path.join(os.getcwd(), 'nltk_data')
-if not os.path.exists(nltk_data_dir):
-    os.makedirs(nltk_data_dir)
-
-nltk.data.path.append(nltk_data_dir)
-
-# Download necessary NLTK resources if they’re not already downloaded
-nltk.download('popular', quiet=True, download_dir=nltk_data_dir)
-nltk.download('nps_chat', quiet=True, download_dir=nltk_data_dir)
-nltk.download('punkt', quiet=True, download_dir=nltk_data_dir)
-nltk.download('wordnet', quiet=True, download_dir=nltk_data_dir)
-
-posts = nltk.corpus.nps_chat.xml_posts()[:10000]
-print(nltk.data.path)
 # Predefined responses dictionary
 predefined_responses = {
     "Hello": "How can I help you?",
     "what are the appointment availability days?": "Consultation: Mondays, Wednesdays, Fridays - 9:00 AM to 12:00 PM. Routine Check-Up: Tuesdays and Thursdays - 2:00 PM to 5:00 PM. Emergency Visit: Daily availability with open slots between 8:00 AM to 9:00 AM, 1:00 PM to 2:00 PM, and 5:00 PM to 6:00 PM.",
-    "I want to book an appoinment": "There are multiple slots available, Daily availability with open slots between 8:00 AM to 9:00 AM, 1:00 PM to 2:00 PM, and 5:00 PM to 6:00 PM. Please let us know your suitable slot",
+    "I want to book an appointment": "There are multiple slots available, Daily availability with open slots between 8:00 AM to 9:00 AM, 1:00 PM to 2:00 PM, and 5:00 PM to 6:00 PM. Please let us know your suitable slot",
     "what types of appointments can I book?": "Appointment Types: Initial Consultation for new patients, Follow-Up for ongoing check-ups, and Teeth Whitening Trial for a 30-minute session.",
     
     "what is the rescheduling policy?": "Patients may reschedule appointments up to 24 hours in advance without any penalty.",
@@ -63,21 +47,16 @@ predefined_responses = {
     "who should I contact about dental implants?": "For questions about potential risks and aftercare for dental implants, please contact Dr. Wong, the Oral Surgeon."
 }
 
-
-
 # Preprocessing functions
-lemmer = WordNetLemmatizer()
-def LemTokens(tokens):
-    return [lemmer.lemmatize(token) for token in tokens]
-
-remove_punct_dict = dict((ord(punct), None) for punct in string.punctuation)
 def LemNormalize(text):
-    return LemTokens(nltk.word_tokenize(text.lower().translate(remove_punct_dict)))
+    # Normalize text using TextBlob for lemmatization
+    blob = TextBlob(text)
+    return [word.lemmatize() for word in blob.words]
 
 # Tokenize input corpus for fallback
 with open('intro_join.txt', 'r', encoding='utf8', errors='ignore') as fin:
     raw = fin.read().lower()
-sent_tokens = nltk.sent_tokenize(raw)
+sent_tokens = [str(sentence) for sentence in TextBlob(raw).sentences]
 
 # Main response function
 def response(user_response):
@@ -92,23 +71,17 @@ def response(user_response):
     if "book an appointment" in user_response:
         return "There are multiple slots available: 8:00 AM - 9:00 AM, 1:00 PM - 2:00 PM, 5:00 PM - 6:00 PM."
 
-    elif "10:00 p.m." in user_response or "10:00 p.m." in user_response:
-        start_time = datetime.now().replace(hour=8, minute=0, second=0)
-        end_time = start_time + timedelta(hours=1)
-        create_appointment(start_time, end_time, 'ik224118@gmail.com', 'ismaeel6034@gmail.com')
-        return "OK, your appointment has been booked for 10:00 PM. Please make sure you're available."
+    appointment_time_dict = {
+        "10:00 p.m.": datetime.now().replace(hour=22, minute=0, second=0),
+        "1:00 p.m.": datetime.now().replace(hour=13, minute=0, second=0),
+        "5:00 p.m.": datetime.now().replace(hour=17, minute=0, second=0),
+    }
 
-    elif "1:00 p.m." in user_response or "1:00 pm" in user_response:
-        start_time = datetime.now().replace(hour=13, minute=0, second=0)
-        end_time = start_time + timedelta(hours=1)
-        create_appointment(start_time, end_time, 'ik224118@gmail.com', 'ismaeel6034@gmail.com')
-        return "OK, your appointment has been booked for 1:00 PM. Please make sure you're available."
-
-    elif "5:00 p.m." in user_response or "5:00 pm" in user_response:
-        start_time = datetime.now().replace(hour=17, minute=0, second=0)
-        end_time = start_time + timedelta(hours=1)
-        create_appointment(start_time, end_time, 'ik224118@gmail.com', 'ismaeel6034@gmail.com')
-        return "OK, your appointment has been booked for 5:00 PM. Please make sure you're available."
+    for time_str, start_time in appointment_time_dict.items():
+        if time_str in user_response:
+            end_time = start_time + timedelta(hours=1)
+            create_appointment(start_time, end_time, 'ik224118@gmail.com', 'ismaeel6034@gmail.com')
+            return f"OK, your appointment has been booked for {time_str}. Please make sure you're available."
 
     # Enhanced fallback response using TF-IDF similarity
     sent_tokens.append(user_response)
