@@ -8,7 +8,6 @@ import speech_recognition as sr
 import nltk
 from nltk.stem import WordNetLemmatizer
 from playsound import playsound
-import pyttsx3
 from fuzzywuzzy import process
 from datetime import datetime, timedelta
 from calendar_utils import create_appointment
@@ -59,9 +58,6 @@ predefined_responses = {
 }
 
 
-# Initialize voice engine
-engine = pyttsx3.init()
-engine.setProperty('rate', 150)
 
 # Preprocessing functions
 lemmer = WordNetLemmatizer()
