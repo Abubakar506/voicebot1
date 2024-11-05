@@ -5,6 +5,17 @@ from aut import authenticate_google_calendar
 from calendar_utils import create_appointment
 import datetime
 import nltk
+import subprocess
+def download_corpora():
+    try:
+        # Attempt to run the textblob download command
+        subprocess.run(['python', '-m', 'textblob.download_corpora'], check=True)
+        print("Download completed.")
+    except subprocess.CalledProcessError as e:
+        print(f"An error occurred while downloading corpora: {e}")
+
+# Call the function to download corpora
+download_corpora()
 # Set up Google Calendar API credentials
 creds = authenticate_google_calendar()
 
