@@ -10,22 +10,9 @@ from playsound import playsound
 from fuzzywuzzy import process
 from datetime import datetime, timedelta
 from calendar_utils import create_appointment
+from textblob import download_corpora
 download_corpora()
 from textblob import TextBlob  
-
-def download_corpora():
-    try:
-        # Check if corpora are already downloaded
-        nltk.data.find('corpora/brown.zip')
-        nltk.data.find('tokenizers/punkt')
-        nltk.data.find('corpora/wordnet.zip')
-        nltk.data.find('taggers/averaged_perceptron_tagger.zip')
-    except LookupError:
-        # If not found, download the required corpora
-        nltk.download('brown', quiet=True)
-        nltk.download('punkt', quiet=True)
-        nltk.download('wordnet', quiet=True)
-        nltk.download('averaged_perceptron_tagger', quiet=True)
 
 # Predefined responses dictionary
 predefined_responses = {
