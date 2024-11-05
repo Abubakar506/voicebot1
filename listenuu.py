@@ -33,6 +33,7 @@ def speak(text):
     tts.convert(text)  # Convert text to audio and play it
 
 def listent():
+    lop=None
     r = sr.Recognizer()
     user_response = None
     response_text = None
@@ -59,7 +60,7 @@ def listent():
     except sr.UnknownValueError:
         print("Could not understand audio")
 
-    return user_response, response_text
+    return user_response, response_text, lop
 
 # Call listen to start the conversation
 if __name__ == "__main__":
