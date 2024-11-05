@@ -5,8 +5,6 @@ from aut import authenticate_google_calendar
 from calendar_utils import create_appointment
 import datetime
 import nltk
-from textblobutils import download_corpora
-download_corpora()  # Ensure the corpora are downloaded
 # Set up Google Calendar API credentials
 creds = authenticate_google_calendar()
 
