@@ -10,11 +10,9 @@ from playsound import playsound
 from fuzzywuzzy import process
 from datetime import datetime, timedelta
 from calendar_utils import create_appointment
-from textblob import download_corpora
+download_corpora()
 from textblob import TextBlob  
 
-# Download necessary TextBlob corpora if they are not already present
-download_corpora()
 def download_corpora():
     try:
         # Check if corpora are already downloaded
