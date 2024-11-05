@@ -27,7 +27,7 @@ nltk.download('punkt', quiet=True, download_dir=nltk_data_dir)
 nltk.download('wordnet', quiet=True, download_dir=nltk_data_dir)
 
 posts = nltk.corpus.nps_chat.xml_posts()[:10000]
-
+print(nltk.data.path)
 # Predefined responses dictionary
 predefined_responses = {
     "Hello": "How can I help you?",
