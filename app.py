@@ -3,12 +3,8 @@ import streamlit as st
 from listen import listen # `listen` should return (user_response, response_text) as shown
 from aut import authenticate_google_calendar
 from calendar_utils import create_appointment
-import pyttsx3
 import datetime
 
-# Initialize voice engine
-engine = pyttsx3.init()
-engine.setProperty('rate', 150)
 
 # Set up Google Calendar API credentials
 creds = authenticate_google_calendar()
