@@ -6,12 +6,15 @@ import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import speech_recognition as sr
-from textblob import TextBlob
 from playsound import playsound
 from fuzzywuzzy import process
 from datetime import datetime, timedelta
 from calendar_utils import create_appointment
+from textblob import download_corpora
+from textblob import TextBlob  
 
+# Download necessary TextBlob corpora if they are not already present
+download_corpora()
 # Predefined responses dictionary
 predefined_responses = {
     "Hello": "How can I help you?",
