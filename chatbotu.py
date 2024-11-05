@@ -10,8 +10,17 @@ from playsound import playsound
 from fuzzywuzzy import process
 from datetime import datetime, timedelta
 from calendar_utils import create_appointment
-from textblobutils import download_corpora
-download_corpora()  # Ensure the corpora are downloaded
+import subprocess
+def download_corpora():
+    try:
+        # Attempt to run the textblob download command
+        subprocess.run(['python', '-m', 'textblob.download_corpora'], check=True)
+        print("Download completed.")
+    except subprocess.CalledProcessError as e:
+        print(f"An error occurred while downloading corpora: {e}")
+
+# Call the function to download corpora
+download_corpora()
 from textblob import TextBlob
 
 # Predefined responses dictionary
