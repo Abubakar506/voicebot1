@@ -10,9 +10,9 @@ from playsound import playsound
 from fuzzywuzzy import process
 from datetime import datetime, timedelta
 from calendar_utils import create_appointment
-from textblob import download_corpora
-download_corpora()
-from textblob import TextBlob  
+from textblob import download_corpora  
+download_corpora()                     
+from textblob import TextBlob
 
 # Predefined responses dictionary
 predefined_responses = {
