@@ -10,7 +10,7 @@ from playsound import playsound
 from fuzzywuzzy import process
 from datetime import datetime, timedelta
 from calendar_utils import create_appointment
-from textblob import download_corpora  
+import textblob  
 textblob.download_corpora()  # Ensure the corpora are downloaded
 from textblob import TextBlob
 
