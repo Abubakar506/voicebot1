@@ -15,3 +15,4 @@ def download_corpora():
         nltk.download('wordnet', quiet=True)
         nltk.download('averaged_perceptron_tagger', quiet=True)
         print("Download completed.")
+    pass 
