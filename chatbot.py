@@ -15,10 +15,10 @@ from calendar_utils import create_appointment
 # Ensure NLTK data path and load necessary modules
 nltk.data.path.append('C:/Users/Dell/AppData/Roaming/nltk_data')
 # for downloading package files can be commented after First run
-nltk.download('popular', quiet=True)
-nltk.download('nps_chat',quiet=True)
-nltk.download('punkt') 
-nltk.download('wordnet')
+nltk.download('popular', quiet=True, download_dir='nltk_data')
+nltk.download('nps_chat',quiet=True, download_dir='nltk_data')
+nltk.download('punkt', download_dir='nltk_data') 
+nltk.download('wordnet', download_dir='nltk_data')
 
 posts = nltk.corpus.nps_chat.xml_posts()[:10000]
 
