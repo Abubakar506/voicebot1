@@ -1,3 +1,4 @@
+from textblob import TextBlob
 def download_corpora():
     try:
         # Check if corpora are already downloaded
