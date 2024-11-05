@@ -32,7 +32,7 @@ def speak(text):
     tts = TextToSpeech()  # Create an instance of TextToSpeech
     tts.convert(text)  # Convert text to audio and play it
 
-def listen():
+def listent():
     r = sr.Recognizer()
     user_response = None
     response_text = None
@@ -64,4 +64,4 @@ def listen():
 # Call listen to start the conversation
 if __name__ == "__main__":
     while True:
-        listen()
+        listent()
