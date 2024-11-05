@@ -5,6 +5,10 @@ from aut import authenticate_google_calendar
 from calendar_utils import create_appointment
 import datetime
 import nltk
+from chatbot import initialize_textblob
+
+# Call the initialization function to ensure TextBlob is ready
+initialize_textblob()
 
 
 
