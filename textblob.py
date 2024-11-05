@@ -15,10 +15,3 @@ def download_corpora():
         nltk.download('wordnet', quiet=True)
         nltk.download('averaged_perceptron_tagger', quiet=True)
         print("Download completed.")
-
-# Call the download_corpora function before importing TextBlob
-download_corpora()  
-
-from textblob import TextBlob  # Now import TextBlob
-
-# Rest of your code using TextBlob
