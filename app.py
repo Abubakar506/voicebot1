@@ -4,6 +4,10 @@ from listen import listen
 from aut import authenticate_google_calendar
 from calendar_utils import create_appointment
 import datetime
+import nltk
+
+# Ensure 'punkt' is downloaded
+nltk.download('punkt')
 
 
 # Set up Google Calendar API credentials
