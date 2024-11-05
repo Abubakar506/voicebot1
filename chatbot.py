@@ -12,13 +12,18 @@ from fuzzywuzzy import process
 from datetime import datetime, timedelta
 from calendar_utils import create_appointment
 
-# Ensure NLTK data path and load necessary modules
-nltk.data.path.append('C:/Users/Dell/AppData/Roaming/nltk_data')
-# for downloading package files can be commented after First run
-nltk.download('popular', quiet=True, download_dir='nltk_data')
-nltk.download('nps_chat',quiet=True, download_dir='nltk_data')
-nltk.download('punkt', download_dir='nltk_data') 
-nltk.download('wordnet', download_dir='nltk_data')
+# Set up the NLTK data path in the current directory for portability
+nltk_data_dir = os.path.join(os.getcwd(), 'nltk_data')
+if not os.path.exists(nltk_data_dir):
+    os.makedirs(nltk_data_dir)
+
+nltk.data.path.append(nltk_data_dir)
+
+# Download necessary NLTK resources if they’re not already downloaded
+nltk.download('popular', quiet=True, download_dir=nltk_data_dir)
+nltk.download('nps_chat', quiet=True, download_dir=nltk_data_dir)
+nltk.download('punkt', quiet=True, download_dir=nltk_data_dir)
+nltk.download('wordnet', quiet=True, download_dir=nltk_data_dir)
 
 posts = nltk.corpus.nps_chat.xml_posts()[:10000]
 
